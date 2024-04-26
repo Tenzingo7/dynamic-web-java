@@ -31,7 +31,8 @@ public class PhoneDetail {
 			}
 			conn.close();
 			st.close();
-			rs.close();
+			rs.close(); //khai bro data display vayena property nai not fuond re
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
