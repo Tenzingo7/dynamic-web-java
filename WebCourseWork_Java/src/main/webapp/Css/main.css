@@ -1,0 +1,130 @@
+@charset "UTF-8";
+ body {
+        font-family: "Archivo", sans-serif;
+		padding:0;
+		margin:0;
+      }
+.navigation-bar{
+	height: 50px;
+ 	display: flex;
+  	align-items: center;
+  	justify-content: space-between;
+  	padding: 0 50px;
+  	background-color: rgb(250, 250, 250);
+  	box-shadow: 7px 5px 7px rgba(52, 49, 49, 0.2);
+  	position: sticky;   
+  	z-index: 100;
+}
+
+.header-left{
+	display:flex;
+}
+.header-right{
+	display:flex;
+	justify-content: space-between;
+}
+
+header .header-left nav ul {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+  font-size: 20px;
+  justify-content: space-between;
+  text-decoration: none;
+
+  
+}
+header .header-left nav ul li a{
+	text-decoration: none;
+	color:black;
+}
+.Company-name{
+	margin-left:80px;
+	font-size:21px;
+	height: auto;
+	
+}
+.main-container{
+	width: 100%;
+}
+.container1{
+	width: 90%;
+	margin-left:5%;
+	margin-top:10%;
+	justify-content: center;
+  	align-items: center;
+  	border: 1px solid black;
+  	display: flex;
+}
+.search-bar{
+	font-size: 17px;
+}
+.search-icon{
+	margin-left: 10px;
+	font-size: 20px;
+}
+.filter{
+	margin-left: 30px;
+	font-size: 20px;
+}
+.cart{
+	margin-left: 20px;
+	font-size: 20px;
+}
+.profile{
+	margin-left: 70px;
+	font-size: 20px;
+}
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
+    padding: 20px 100px;
+    background: grey;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo{
+    font-size: 32px;
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+}
+.navbar a{
+    position: relative;
+    font-size: 18px;
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+ .navbar a::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: .3s; 
+ }
+.navbar a:hover::before{
+    width: 100%;
+}
+button{
+    position: relative;
+    font-size: 18px;
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+section{
+    padding: 65px 100px;
+    margin-left: 100px;
+    float: right;
+}
