@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/admin")
 public class AdminController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +27,7 @@ public class AdminController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("view/admin.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
 	}
 
 	/**
