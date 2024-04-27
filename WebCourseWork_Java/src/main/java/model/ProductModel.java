@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entity.Product;
+import Entity.ProductEntity;
 
-public class PhoneDetail {
-	public List<Product> getAllProduct(){
-		List<Product> phoneDetails = new ArrayList<Product>();
+public class ProductModel {
+	public List<ProductEntity> getAllProduct(){
+		List<ProductEntity> phoneList = new ArrayList<ProductEntity>();
 		try {
 			String sql="select * from product";
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -20,18 +20,17 @@ public class PhoneDetail {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
-				Product productObject = new Product();
+				ProductEntity productObject = new ProductEntity();
 				productObject.setProductID(rs.getInt("ProductID"));
 				productObject.setProductName(rs.getString("ProductName"));
 				productObject.setProductDescription(rs.getString("ProductDescription"));
 				productObject.setProductPrice(rs.getInt("ProductPrice"));
 				productObject.setProductStock(rs.getInt("ProductStock"));
 				
-				phoneDetails.add(productObject);
+				phoneList.add(productObject);
 			}
 			conn.close();
-			st.close();
-			rs.close(); //khai bro data display vayena property nai not fuond re
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -40,6 +39,6 @@ public class PhoneDetail {
 		// TODO Auto-generated catch block
 			e.printStackTrace();	
 		}
-		return phoneDetails;
+		return phoneList;
 	}
 }
