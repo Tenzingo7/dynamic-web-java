@@ -12,10 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class AddProductController
  */
-@WebServlet("/AddProduct")
+@WebServlet(asyncSupported = true, urlPatterns = { "/addproduct" })
 public class AddProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,14 +33,14 @@ public class AddProductController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/addproduct.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/AddProduct.jsp").forward(request, response);
+		System.out.print("ola");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String name = request.getParameter("productname");
 		String description = request.getParameter("productdescription");
 		String price = request.getParameter("productprice");
@@ -85,8 +86,9 @@ public class AddProductController extends HttpServlet {
 	    // If the MySQL driver class is not found, print the error
 			e.printStackTrace();
 		}
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-}
 
+}
 
