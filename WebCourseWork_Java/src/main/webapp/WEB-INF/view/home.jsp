@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/ac966e1bc8.js" ></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/Css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" />
 <title>Insert title here</title>
 </head> 
 <body>
@@ -48,14 +48,10 @@
   	<img style = 'width: 100%;' src = 'main10.png'>
   </div>
   <div class = 'container1'>
-  	<c:set var="counter" value="1" />
-							<c:forEach var="product" items="${productObject}">
-								<tr>
-									<td><c:out value="${counter}" /></td>
-									<td><c:out value="${product.ProductDescription}"></c:out></td>
-								</tr>
-								<c:set var="counter" value="${counter + 1}" />
-							</c:forEach>
+  	<c:forEach var="PhoneObject" items="${productObject}">
+    	<c:out value="${PhoneObject.productName}" />
+    	<c:out value="${PhoneObject.productDescription}" />
+	</c:forEach>
   </div>
 </body>
 </html>
