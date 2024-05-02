@@ -1,0 +1,110 @@
+package DatabaseConnectionObjects;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Entity.UserEntity;
+
+
+public class UserDao {
+	private Connection conn;
+	private PreparedStatement statement;
+	private ResultSet rs;
+	 
+	private boolean isSucess;
+	private static final String sql = "insert into user ( UserName, Password, email,FirstName, LastName,Address, Country, PhoneNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	public boolean RegisterUser(UserEntity User) {
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3325/mobile_phone" , "root", "root");
+			statement = conn.prepareStatement("select count(*) from user");
+			rs = statement.executeQuery();
+			if (rs.next()) {
+				if (check(User)) {
+					System.out.print("already exists");
+				} else {
+					setData(User);
+					isSucess = true;
+				}
+
+			} else {
+				setData(User);
+				isSucess = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return isSucess;
+	}
+	
+	public boolean check(UserEntity User) {
+		boolean isFind = false;
+		try {
+			statement = conn.prepareStatement("select UserName,email from user");
+			rs = statement.executeQuery();
+
+			while (rs.next()) {
+				if (User.getUserName().equals(rs.getString("UserName"))) {
+					isFind = true;
+					break;
+				} else if (User.getEmail().equals(rs.getString("email"))) {
+					isFind = true;
+					break;
+				}else {
+					isFind = false;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isFind;
+	}
+	
+	public int setData(UserEntity User) throws SQLException {
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3325/mobile_phone" , "root", "root");
+		int row = 0;
+		try {
+			statement = conn.prepareStatement(sql);
+			statement.setString(1, User.getUserName());
+			statement.setString(2, User.getPassword());
+			statement.setString(3, User.getEmail());
+			statement.setString(4, User.getFirstName());
+			statement.setString(5, User.getLastName());	
+			statement.setString(6, User.getAddress());
+			statement.setString(7, User.getCountry());
+			statement.setLong(8, User.getPhoneNumber());
+			
+			
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	
+	public boolean studentLogin(String username, String password) throws SQLException {
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3325/mobile_phone" , "root", "root");
+		statement = conn.prepareStatement("select UserName,Password from user where UserName=?");
+		statement.setString(1, username);
+		rs = statement.executeQuery();
+		boolean isSuccess = false;
+		if (rs.next()) {
+			String ExistingPassword = rs.getString("password");
+			if (password.equals(ExistingPassword)){ 
+				isSuccess = true;
+			} else {
+				isSuccess = false;
+			}
+
+		}
+		return isSuccess;
+
+	}
+}
+
