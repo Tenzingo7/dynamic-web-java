@@ -1,0 +1,70 @@
+package Controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import DatabaseConnectionObjects.UserDao;
+import Entity.UserEntity;
+
+/**
+ * Servlet implementation class UserRegisterController
+ */
+@WebServlet(asyncSupported = true, urlPatterns = { "/userRegister" })
+public class UserRegisterController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserRegisterController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String userName = request.getParameter("UserName");
+		String email = request.getParameter("Email");
+		String firstName = request.getParameter("FirstName");
+		String lastName = request.getParameter("LastName");
+		String address = request.getParameter("Address");
+		String country = request.getParameter("Country");
+		String phoneNumber = request.getParameter("PhoneNumber");
+		String password = request.getParameter("Password");
+		response.setContentType("text/html");
+		
+		UserDao userDao = new UserDao();
+		
+		UserEntity User = new UserEntity();
+		User.setFirstName(firstName);
+		User.setLastName(lastName);
+		User.setUserName(userName);
+		User.setAddress(address);
+		User.setCountry(country);
+		User.setEmail(email);
+		User.setPhoneNumber(phoneNumber);
+		User.setPassword(password);
+		if (userDao.RegisterUser(User)) {
+			response.sendRedirect("userLogin");
+		} else {
+			request.setAttribute("error1", "username or email or phonenumber exist");
+			doGet(request, response);
+		}
+	}
+}
